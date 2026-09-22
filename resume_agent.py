@@ -107,13 +107,13 @@ def profiler_agent(state:ResumeAgentState):
     """
     structured_llm=llm.with_structured_output(ProfilerOutput, method="function_calling")
     response=structured_llm.invoke([SystemMessage(content=profiler_prompt)])
-    print(f"""
-        job_list：{state["job_list"]}
-        岗位画像：{response.job_profile}\n\n,
-        技能分析：{response.skill_analysis}\n\n,
-        简历建议：{response.resume_suggestions}\n
-
-    """)
+    # print(f"""
+    #     job_list：{state["job_list"]}
+    #     岗位画像：{response.job_profile}\n\n,
+    #     技能分析：{response.skill_analysis}\n\n,
+    #     简历建议：{response.resume_suggestions}\n
+    #
+    # """)
     return{"job_profile":response.job_profile,
            "skill_analysis":response.skill_analysis,
            "resume_suggestions":response.resume_suggestions,
@@ -148,10 +148,8 @@ def human_review(state:ResumeAgentState):
             }
 
 def router_satisfy(state:ResumeAgentState)->str:
-    print(f"""收到opinion={state["opinion"]!r}""")
+    # print(f"""收到opinion={state["opinion"]!r}""")
     fb=state["opinion"].strip().lower()
-    print(f"""判断fb？opinion：{fb!r}""")
-    print("判断结果：",fb=="y")
     if fb =="y":
          return "satisfied"
     else:
